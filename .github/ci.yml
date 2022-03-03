@@ -22,13 +22,17 @@ jobs:
       - name: Install Schematic
         shell: bash
         run: |
+          pip3 install poetry
           git clone --single-branch --branch develop https://github.com/Sage-Bionetworks/schematic.git
-          python3 -m pip install schematicpy
+          cd schematic
+          poetry build
+          pip3 install dist/schematicpy-1.0.0-py3-none-any.whl
 
       - name: Convert .csv to .jsonld
         shell: bash
         run: |
-          schematic schema convert HTAN.model.csv
+          # change "example" to your community name
+          schematic schema convert example.model.csv
 
       - name: Update .jsonld in the Branch
         run: |
