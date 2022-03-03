@@ -1,12 +1,12 @@
-# This workflow is used to convert changed HTAN.model.csv to HTAN.model.jsonld
-# and push the updated HTAN.model.jsonld to feature branch
+# This workflow is used to convert changed {community}.model.csv to {community}.model.jsonld
+# and push the updated {community}.model.jsonld to feature branch
 
 name: Schema Converter
 
 on:
   push:
     paths:
-      - 'HTAN.model.csv'
+      - 'example.model.csv' # change "example" to your community name
 
 jobs:
   build:
@@ -35,6 +35,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout ${GITHUB_REF##*/}
-          git add HTAN.model.jsonld
+          # change "example" to your community name
+          git add example.model.jsonld
           git commit -m "auto convert to .jsonld"
           git push origin ${GITHUB_REF##*/}
