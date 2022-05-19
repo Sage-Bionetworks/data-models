@@ -43,9 +43,7 @@ jobs:
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git checkout ${GITHUB_REF##*/}
           git add \*.model.jsonld
           git commit -m "GitHub Action: convert *.model.csv to *.model.jsonld" || echo "No changes to commit"
-
-      - uses: r-lib/actions/pr-push@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          git push origin ${GITHUB_REF##*/}
