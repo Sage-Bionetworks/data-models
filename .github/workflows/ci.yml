@@ -1,6 +1,5 @@
 # This workflow is used to convert changed {community}.model.csv to {community}.model.jsonld
 # and push the updated {community}.model.jsonld to feature branch
-
 name: CI
 
 on:
