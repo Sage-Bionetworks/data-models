@@ -40,6 +40,8 @@ jobs:
           schematic schema convert *.model.csv
 
       - uses: r-lib/actions/pr-fetch@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit the changes
         run: |
@@ -49,3 +51,5 @@ jobs:
           git commit -m "GitHub Action: convert *.model.csv to *.model.jsonld" || echo "No changes to commit"
 
       - uses: r-lib/actions/pr-push@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
