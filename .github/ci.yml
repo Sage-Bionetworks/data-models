@@ -4,13 +4,18 @@
 name: Schema Converter
 
 on:
-  push:
-    paths:
-      - 'example.model.csv' # change "example" to your community name
+  pull request:
+    branches: main
+    # change * to your data-model.csv name if needed
+    paths: '*.model.csv'
 
 jobs:
-  build:
+  CI:
+    name: schema-convert
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -31,15 +36,17 @@ jobs:
       - name: Convert .csv to .jsonld
         shell: bash
         run: |
-          # change "example" to your community name
-          schematic schema convert example.model.csv
+          # change * to your data-model.csv name if needed
+          schematic schema convert *.model.csv
 
       - name: Update .jsonld in the Branch
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git checkout ${GITHUB_REF##*/}
-          # change "example" to your community name
-          git add example.model.jsonld
-          git commit -m "auto convert to .jsonld"
-          git push origin ${GITHUB_REF##*/}
+          git add \*.model.jsonld
+          git commit -m "GitHub Action: convert *.model.csv to *.model.jsonld" || echo "No changes to commit"
+
+      - uses: r-lib/actions/pr-push@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
