@@ -6,7 +6,7 @@ name: Schema Converter
 on:
   push:
     # change * to your data-model.csv name if needed
-    paths: '*.model.csv'
+    paths: '**.model.csv'
 
 jobs:
   CI:
