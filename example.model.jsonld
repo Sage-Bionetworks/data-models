@@ -2434,7 +2434,7 @@
             },
             "schema:rangeIncludes": [
                 {
-                    "@id": "bts:GRCh37"
+                    "@id": "bts:GRCh372"
                 },
                 {
                     "@id": "bts:GRCh38"
@@ -2672,10 +2672,10 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:GRCh37",
+            "@id": "bts:GRCh372",
             "@type": "rdfs:Class",
             "rdfs:comment": "TBD",
-            "rdfs:label": "GRCh37",
+            "rdfs:label": "GRCh372",
             "rdfs:subClassOf": [
                 {
                     "@id": "bts:GenomeBuild"
@@ -2684,7 +2684,7 @@
             "schema:isPartOf": {
                 "@id": "http://schema.biothings.io"
             },
-            "sms:displayName": "GRCh37",
+            "sms:displayName": "GRCh372",
             "sms:required": "sms:false",
             "sms:validationRules": []
         },
