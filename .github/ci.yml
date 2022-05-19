@@ -4,8 +4,7 @@
 name: Schema Converter
 
 on:
-  pull request:
-    branches: main
+  push:
     # change * to your data-model.csv name if needed
     paths: '*.model.csv'
 
