@@ -2052,10 +2052,10 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:YearofBirth",
+            "@id": "bts:Year1111ofBirth",
             "@type": "rdfs:Class",
             "rdfs:comment": "TBD",
-            "rdfs:label": "YearofBirth",
+            "rdfs:label": "Year1111ofBirth",
             "rdfs:subClassOf": [
                 {
                     "@id": "bts:DataProperty"
@@ -2064,7 +2064,7 @@
             "schema:isPartOf": {
                 "@id": "http://schema.biothings.io"
             },
-            "sms:displayName": "Year of Birth",
+            "sms:displayName": "Year1111 of Birth",
             "sms:required": "sms:false",
             "sms:validationRules": []
         },
@@ -2465,6 +2465,23 @@
             },
             "sms:displayName": "Genome FASTA",
             "sms:required": "sms:true",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:YearofBirth",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "YearofBirth",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:Patient"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "Year of Birth",
+            "sms:required": "sms:false",
             "sms:validationRules": []
         },
         {
