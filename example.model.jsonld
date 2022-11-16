@@ -2484,9 +2484,6 @@
             "sms:required": "sms:false",
             "sms:requiresDependency": [
                 {
-                    "@id": "bts:Component"
-                },
-                {
                     "@id": "bts:CheckList"
                 },
                 {
@@ -2536,6 +2533,9 @@
                 },
                 {
                     "@id": "bts:CheckRange"
+                },
+                {
+                    "@id": "bts:Component"
                 }
             ],
             "sms:validationRules": []
