@@ -1,6 +1,7 @@
 # ------------------------------------------------------------------------------
 # When the main branch is updated, trigger a workflow in sage-bionetworks/data_curator_config
 # to generate templates from the data modell in this repo.
+#
 # You need to generate a secret in your github repo "PAT_GITHUB" containing
 # a personal access token with repo scope. The default secrets.GITHUB_TOKEN
 # will not work.
