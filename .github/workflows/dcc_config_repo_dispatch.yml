@@ -31,12 +31,12 @@ on:
     # Extra logic to check PR is merged, see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
     if_merged:
       if: github.event.pull_request.merged == true
-        runs-on: ubuntu-latest
-        steps:
-          - name: Repo dispatch to data_curator_config event generate-templates
-            run: |
-              curl -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github+json" \
-              https://api.github.com/repos/Sage-Bionetworks/data_curator_config/dispatches \
-              -d '{"event_type": "generate_templates", "client_payload": { "commit_sha": "'${{ github.sha }}'",  "client_repo": "'${{ github.repository }}'"}'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Repo dispatch to data_curator_config event generate-templates
+          run: |
+            curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/Sage-Bionetworks/data_curator_config/dispatches \
+            -d '{"event_type": "generate_templates", "client_payload": { "commit_sha": "'${{ github.sha }}'",  "client_repo": "'${{ github.repository }}'"}'
