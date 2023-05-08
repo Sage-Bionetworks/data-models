@@ -31,7 +31,7 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      run: echo ${{github.event}}
+      - run: echo ${{github.event}}
   repo_dispatch:
     # Extra logic to check PR is merged, see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
     if: github.event.pull_request.merged == true || github.event != 'pull_request'
