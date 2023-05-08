@@ -15,6 +15,8 @@ on:
       - closed # requires if_merged job below to run only during a merged PR
   workflow_dispatch:
 
+permissions: write-all
+
 concurrency:
 # cancel the current running workflow from the same branch, PR when a new workflow is triggered 
 # when the trigger is not a PR but a push, it will use the commit sha to generate the concurrency group
@@ -28,7 +30,6 @@ concurrency:
   cancel-in-progress: true
   
 jobs:
-  permissions: write-all
   repo_dispatch:
     # Extra logic to check PR is merged, see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
     if: github.event.pull_request.merged == true || github.event != 'pull_request'
