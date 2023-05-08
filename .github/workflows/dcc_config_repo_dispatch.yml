@@ -28,9 +28,9 @@ concurrency:
   cancel-in-progress: true
   
 jobs:
-  # Extra logic to check PR is merged, see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
-  if_merged:
-    if: github.event.pull_request.merged == true
+  repo_dispatch:
+    # Extra logic to check PR is merged, see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
+    if: ${{ github.event.pull_request.merged == true || github.event != "pull_request" }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo dispatch to data_curator_config event generate-templates
