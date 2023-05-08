@@ -18,12 +18,13 @@ on:
       - closed # requires if_merged job below to run only during a merged PR
   workflow_dispatch:
 
+# Edit these variables for your data model
 env:
-  DATA_MODEL: 'https://raw.githubusercontent.com/Sage-Bionetworks/data-models/main/example.model.jsonld'
+  DATA_MODEL: https://raw.githubusercontent.com/Sage-Bionetworks/data-models/main/example.model.jsonld
   # Can be NULL to generate templates for all schemas. Or a space-delimited string of schemas
-  DATA_TYPES: 'Biospecimen BulkRNA-seqAssay Patient'
-  TEMPLATE_DIR: 'demo/templates'
-  
+  DATA_TYPES: "Biospecimen BulkRNA-seqAssay Patient"
+  TEMPLATE_DIR: demo/templates
+
 permissions: write-all
 
 concurrency:
