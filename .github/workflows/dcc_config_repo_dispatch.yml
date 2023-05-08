@@ -19,10 +19,10 @@ on:
   workflow_dispatch:
 
 env:
-  DATA_MODEL: https://raw.githubusercontent.com/Sage-Bionetworks/data-models/main/example.model.jsonld
+  DATA_MODEL: 'https://raw.githubusercontent.com/Sage-Bionetworks/data-models/main/example.model.jsonld'
   # Can be NULL to generate templates for all schemas. Or a space-delimited string of schemas
-  DATA_TYPES: Biospecimen BulkRNA-seqAssay Patient
-  TEMPLATE_DIR: demo/templates
+  DATA_TYPES: 'Biospecimen BulkRNA-seqAssay Patient'
+  TEMPLATE_DIR: 'demo/templates'
   
 permissions: write-all
 
@@ -50,4 +50,4 @@ jobs:
           -H "Authorization: token ${{ secrets.PAT_GITHUB }}" \
           -H "Accept: application/vnd.github+json" \
           https://api.github.com/repos/Sage-Bionetworks/data_curator_config/dispatches \
-          -d '{"event_type": "generate_templates", "client_payload": { "data_model": "'${{ env.DATA_MODEL }}'",  "data_types": "'${{ env.DATA_TYPES }}'"  "template_dir": "'${{ env.TEMPLATE_DIR }}'"}'
+          -d '{"event_type": "generate_templates", "client_payload": { "data_model": "'${{ env.DATA_MODEL }}'",  "data_types": "'${{ env.DATA_TYPES }}'"  "template_dir": "'${{ env.TEMPLATE_DIR }}'"}}'
