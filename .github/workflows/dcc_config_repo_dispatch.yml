@@ -26,8 +26,6 @@ env:
   DATA_TYPES: "Biospecimen BulkRNA-seqAssay Patient"
   TEMPLATE_DIR: demo/templates
 
-permissions: write-all
-
 concurrency:
 # cancel the current running workflow from the same branch, PR when a new workflow is triggered 
 # when the trigger is not a PR but a push, it will use the commit sha to generate the concurrency group
@@ -49,7 +47,7 @@ jobs:
       - name: Repo dispatch to data_curator_config event generate-templates
         run: |
           curl -X POST \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Authorization: token ${{ secrets.PAT_GITHUB }}" \
           -H "Accept: application/vnd.github+json" \
           https://api.github.com/repos/Sage-Bionetworks/data_curator_config/dispatches \
           -d '{"event_type": "generate_templates", "client_payload": { "data_model": "${{ env.DATA_MODEL }}",  "data_types": "${{ env.DATA_TYPES }}", "template_dir": "${{ env.TEMPLATE_DIR }}"}}'
