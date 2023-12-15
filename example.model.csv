@@ -33,7 +33,6 @@ Check Match at Least,,,,,TRUE,DataProperty,,,matchAtLeastOne Patient.PatientID s
 Check Match Exactly,,,,,TRUE,DataProperty,,,matchExactlyOne MockComponent.checkMatchExactly set
 Check Match at Least values,,,,,TRUE,DataProperty,,,matchAtLeastOne MockComponent.checkMatchatLeastvalues value
 Check Match Exactly values,,,,,TRUE,DataProperty,,,matchExactlyOne MockComponent.checkMatchExactlyvalues value
-Check Recommended,,,,,FALSE,DataProperty,,,recommended
 Check Ages,,,,,TRUE,DataProperty,,,protectAges
 Check Unique,,,,,TRUE,DataProperty,,,unique error
 Check Range,,,,,TRUE,DataProperty,,,inRange 50 100 error
