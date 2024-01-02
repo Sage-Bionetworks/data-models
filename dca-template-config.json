@@ -13,7 +13,11 @@
     {
       "display_name": "MockComponent",
       "schema_name": "MockComponent",
-      "type": "record"
+      "type": "record",
+      "project_scope": [
+        "syn53210550",
+        "syn53210551"
+      ]
     },
     {
       "display_name": "Other Assay",
