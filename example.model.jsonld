@@ -612,7 +612,7 @@
             "sms:displayName": "Filename",
             "sms:required": "sms:true",
             "sms:validationRules": {
-                "Filename": "filenameExists"
+                "all_other_components": "filenameExists"
             }
         },
         {
