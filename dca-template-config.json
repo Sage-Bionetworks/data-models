@@ -6,26 +6,26 @@
       "type": "record"
     },
     {
+      "display_name": "Patient",
+      "schema_name": "Patient",
+      "type": "record"
+    },
+    {
       "display_name": "Bulk RNA-seq Assay",
       "schema_name": "BulkRNA-seqAssay",
       "type": "file"
     },
     {
-      "display_name": "MockComponent",
-      "schema_name": "MockComponent",
+      "display_name": "Other Assay",
+      "schema_name": "OtherAssay",
       "type": "record"
     },
     {
-      "display_name": "Other Assay",
-      "schema_name": "OtherAssay",
-      "type": "file"
-    },
-    {
-      "display_name": "Patient",
-      "schema_name": "Patient",
+      "display_name": "Data Type Not In Data Model",
+      "schema_name": "DataTypeNotInDataModel",
       "type": "record"
     }
   ],
-  "service_version": "v23.11.1-docker",
+  "service_version": "v23.1.1",
   "schema_version": ""
 }

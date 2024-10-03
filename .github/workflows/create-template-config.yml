@@ -36,6 +36,10 @@ on:
       exclude_data_types:
         description: Space-separated string of data types to exclude from output. Must be empty if using include_data_types.
         required: false
+      data_model_labels:
+        description: How schematic gets data model labels. Defaults `class_label`.
+        default: 'class_label'
+        required: true
 
 jobs:
   create-template-config:
@@ -57,6 +61,7 @@ jobs:
           file: ${{ inputs.file }}
           include_data_types: ${{ inputs.include_data_types }}
           exclude_data_types: ${{ inputs.exclude_data_types }}
+          data_model_labels: ${{ inputs.data_model_labels }}
         
       - name: Validate Config File
         uses: docker://orrosenblatt/validate-json-action:latest
