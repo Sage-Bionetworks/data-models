@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4 
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Schematic
         shell: bash
@@ -28,14 +28,13 @@ jobs:
           pip3 install poetry
           git clone --single-branch --branch develop https://github.com/Sage-Bionetworks/schematic.git
           cd schematic
-          poetry build
-          pip3 install dist/schematicpy-1.0.0-py3-none-any.whl
+          poetry install
 
       - name: Convert .csv to .jsonld
         shell: bash
         run: |
           # change * to your data-model.csv name if needed
-          schematic schema convert *.model.csv
+          poetry run schematic schema convert *.model.csv
 
       - uses: r-lib/actions/pr-fetch@v2
         with:
