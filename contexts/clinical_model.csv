@@ -1,0 +1,3 @@
+Attribute,Description,DependsOn,Valid Values,Required,columnType,IsTemplate,Format,Maximum,Minimum,Pattern,Validation Rules,Parent,Source
+clinical_template,"Clinical template","fileFormat",,,,True,,,,,,,
+fileFormat,"Defined format of the data file, typically corresponding to extension, but sometimes indicating more general group of files produced by the same tool or software",,"csv, txt",True,string,,,,,,,,

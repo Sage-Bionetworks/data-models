@@ -1,6 +1,6 @@
 # Data Models
 
-> [!NOTE]
+> [!IMPORTANT]
 > The default branch has been converted to `tyu-refresh`, but the content is still under review https://github.com/Sage-Bionetworks/data-models/pull/43.  Once this PR is merged, the default branch will be converted back to `main`.  Feedback would be greatly appreciated.
 
 The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for [Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). This can be used by those that prefer working in a tabular format (CSV) over JSON or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/).  The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
@@ -12,15 +12,22 @@ This repository will recommend two different ways to maintaining your data model
 
 ## One CSV
 
-[example.model.csv](./example.model.csv) is a CSV representation of the example data model.
+[example.model.csv](./one_csv/example.model.csv) is a CSV representation of the example data model.
 
 ## Modular CSV
 
 When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The [modules](./modules) folder contain an example of how the [example.model.csv](./example.model.csv) is broken down.
 
-# Descriptions of valid values?
+## Contextualized CSV
 
-The "Valid Values" column for different data model attributes can often contain many values without any descriptions. In this scenario, you can add descriptions to these valid values by adding extra rows in your data model csv under one condition.  The valid value CANNOT appear in any string value in the "DependsOn" column unless you wanted it to be a valid value of a column AND a column.
+Motivated by the ARK portal https://github.com/ARK-Portal/data_model data model, the data model can be created to utilize "contexts" in order to have context-specific conditionally required attributes with the bonus of also being able to define context-specific valid value lists for model attributes and more. An small example of this can be found in the [contexts](./contexts/) folder. Each data model is within it's own csv, a user can modularize this as well in whatever way they choose.  In this scenario, each "template" would have it's own data model csv and the generate-json-schema command would be run for each template csv instead of concatenating all of the CSV together.
+
+# Descriptions of valid values
+
+The "Valid Values" column for attributes often contain many values without any descriptions. In this scenario, you can add descriptions to these valid values by adding extra rows and having these valid values appear as "Attributes".
+
+> [!CAUTION]
+> When adding valid value as an Attirbute to add a description of the valid value, it CANNOT appear in any string value in the "DependsOn" column unless you wanted it to be a data model attribute as well.
 
 # Generating JSON schemas
 
