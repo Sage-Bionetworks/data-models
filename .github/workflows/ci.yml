@@ -69,4 +69,4 @@ jobs:
         with:
           org-name: dpetest
           schema-dir: ${{ steps.generate.outputs.schemas }}
-          synapse_auth_token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
+          synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
