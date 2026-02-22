@@ -34,25 +34,41 @@ The "Valid Values" column for attributes often contain many values without any d
 
 ---
 
-# Generating JSON schemas
+# Manually Generating JSON schemas
 
-To generate jsonschemas, you will want to install the Synapse Python Client along with the curation extension.
+To manually generate jsonschemas, you are required to install the Synapse Python Client along with the curation extension. Each of the data model options above will have slightly different methods of generating JSON schemas.
+
+> [!NOTE]
+> This section assumes that you already have working proficiency with Python.
 
 ```
 pip install "synapseclient[curator]"
 ```
 
-To generate jsonschemas
+## One CSV
+
+Generate all data model jsonschemas from one CSV.
 
 ```
-synapse generate-json-schema example.model.csv --data-model-labels display_label
+synapse generate-json-schema one_csv/example.model.csv --data-model-labels display_label
 ```
 
-If you are using the modular CSV method, you will want to follow these instructions
+## Modular CSV
+
+Concatenate all CSVs and generate all data model jsonschemas from the assembled CSV.
 
 ```
 python scripts/assemble_csv_data_model.py modules assembled.csv
 synapse generate-json-schema assembled.csv --data-model-labels display_label
+```
+
+## Contextualized CSV
+
+Generate a jsonschema from each data model CSV.
+
+```
+synapse generate-json-schema contexts/clinical_model.csv --data-model-labels display_label
+synapse generate-json-schema contexts/genomic_model.csv --data-model-labels display_label
 ```
 
 ---
