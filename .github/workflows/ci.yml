@@ -1,5 +1,4 @@
-# This workflow is used to convert changed {community}.model.csv to {community}.model.jsonld
-# and push the updated {community}.model.jsonld to feature branch
+# This workflow is used to generate jsonschemas from {community}.model.csv
 
 name: CI
 
@@ -18,7 +17,8 @@ on:
       - "*"
 
 jobs:
-  generate-one-csv:
+
+  generate-jsonschema-from-one-csv:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,7 +29,7 @@ jobs:
           data-model-source: ./example.model.csv
           data-model-labels: "display_label"
 
-  assemble-and-generate:
+  generate-jsonschema-from-multiple-csv:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
