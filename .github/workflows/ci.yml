@@ -63,3 +63,10 @@ jobs:
             **/*.json
             assembled.model.csv
           if-no-files-found: warn
+      - name: Register schemas in Synapse
+        id: register
+        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        with:
+          org-name: dpetest
+          schema-dir: ${{ steps.generate.outputs.schemas }}
+          synapse_auth_token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
