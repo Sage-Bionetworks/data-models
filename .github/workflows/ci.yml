@@ -4,14 +4,21 @@
 name: CI
 
 on:
+
   pull_request:
-    branches: main
+    branches:
+      - main
     # change * to your data-model.csv name if needed
-    paths: '**.model.csv'
+    paths:
+      - '**.model.csv'
+      - "modules/**"
+
+  push:
+    branches:
+      - "*"
 
 jobs:
-  CI:
-    name: generate-jsonschema
+  generate-one-csv:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -20,4 +27,25 @@ jobs:
         uses: Sage-Bionetworks-Actions/generate-jsonschema@main
         with:
           data-model-source: ./example.model.csv
+          data-model-labels: "display_label"
+
+  assemble-and-generate:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Assemble CSV files
+        run: |
+          python scripts/assemble_csv_data_model.py ./modules/ assembled.model.csv
+      - name: Generate JSON Schemas
+        id: generate
+        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
+        with:
+          data-model-source: ./assembled.model.csv
           data-model-labels: "display_label"
