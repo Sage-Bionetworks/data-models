@@ -43,9 +43,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - csv-file: "./context/clinical_model.csv"
+          - csv-file: "./contexts/clinical_model.csv"
             artifact-name: "clinical-json-schema"
-          - csv-file: "./context/genomic_model.csv"
+          - csv-file: "./contexts/genomic_model.csv"
             artifact-name: "genomic-json-schema"
     steps:
       - uses: actions/checkout@v6
