@@ -28,6 +28,12 @@ jobs:
         with:
           data-model-source: ./example.model.csv
           data-model-labels: "display_label"
+      - name: Upload schemas as artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: json-schemas
+          path: "**/*.json"
+          if-no-files-found: warn
 
   generate-jsonschema-from-multiple-csv:
     runs-on: ubuntu-latest
@@ -49,3 +55,11 @@ jobs:
         with:
           data-model-source: ./assembled.model.csv
           data-model-labels: "display_label"
+      - name: Upload schemas and assembled model as artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: json-schemas-and-assembled-csv
+          path: |
+            **/*.json
+            assembled.model.csv
+          if-no-files-found: warn
