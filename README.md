@@ -104,9 +104,6 @@ Each portal is recommended to maintain **two separate Synapse schema organizatio
 
 - `test.sage.{portal_name}`
 
-> Only development validation should point here.
-
-
 ### Production Schema Organization (Released)
 
 **Purpose**
@@ -124,8 +121,6 @@ Each portal is recommended to maintain **two separate Synapse schema organizatio
 
 - `sage.schemas.{portal_name}`
 - `org.synapse.{portal_name}`
-
-> Production Curator configurations must reference explicit released versions from this organization.
 
 ---
 
