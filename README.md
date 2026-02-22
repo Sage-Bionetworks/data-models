@@ -34,6 +34,13 @@ The "Valid Values" column for attributes often contain many values without any d
 
 ---
 
+# Using this template repository
+
+1. Decide on the way you want to organize and maintain your data model (three options above)
+1. 
+
+---
+
 # Manually Generating JSON schemas
 
 To manually generate jsonschemas, you are required to install the Synapse Python Client along with the curation extension. Each of the data model options above will have slightly different methods of generating JSON schemas.

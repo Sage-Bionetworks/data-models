@@ -1,6 +1,6 @@
 # This workflow is used to generate jsonschemas from {community}.model.csv
 
-name: CI
+name: JSON Schema Generation CI/CD for Modular CSV
 
 on:
 
@@ -20,58 +20,6 @@ on:
   #     - "*"
 
 jobs:
-
-  generate-jsonschema-from-one-csv:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Generate JSON Schemas
-        id: generate
-        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
-        with:
-          data-model-source: ./one_csv/example.model.csv
-          data-model-labels: "display_label"
-      - name: Upload schemas as artifacts
-        uses: actions/upload-artifact@v6
-        with:
-          name: json-schemas
-          path: "**/*.json"
-          if-no-files-found: warn
-
-  generate-jsonschema-from-context:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - csv-file: "./contexts/clinical_model.csv"
-            artifact-name: "clinical-json-schema"
-          - csv-file: "./contexts/genomic_model.csv"
-            artifact-name: "genomic-json-schema"
-    steps:
-      - uses: actions/checkout@v6
-      - name: Check if CSV file exists
-        run: |
-          if [ ! -f "${{ matrix.csv-file }}" ]; then
-            echo "CSV file ${{ matrix.csv-file }} not found, skipping..."
-            echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-          fi
-        id: check-file
-      - name: Generate JSON Schemas
-        if: steps.check-file.outputs.skip == 'false'
-        id: generate
-        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
-        with:
-          data-model-source: ${{ matrix.csv-file }}
-          data-model-labels: "display_label"
-      - name: Upload schemas as artifacts
-        if: steps.check-file.outputs.skip == 'false'
-        uses: actions/upload-artifact@v6
-        with:
-          name: ${{ matrix.artifact-name }}
-          path: "**/*.json"
-          if-no-files-found: warn
 
   generate-jsonschema-from-multiple-csv:
     runs-on: ubuntu-latest
