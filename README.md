@@ -9,7 +9,7 @@ This repository will recommend three different ways to maintaining your data mod
 
 1. One CSV
 1. Modular CSV
-1. Context driven CSV
+1. Contextualized CSV
 
 ## One CSV
 
