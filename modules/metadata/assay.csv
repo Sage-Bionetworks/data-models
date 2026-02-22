@@ -1,0 +1,4 @@
+Attribute,Description,DependsOn,Valid Values,Required,columnType,IsTemplate,Format,Maximum,Minimum,Pattern,Validation Rules,Parent,Source
+assay,"The technology used to generate the data in this file",,"10x multiome, 16SrRNAseq",True,string,,,,,,,,
+10x multiome,"10x multiome assay, which profiles gene expression and chromatin accessibility in the same cell",,,,,,,,,,,,
+16SrRNAseq,"16S rRNA sequencing assay, which profiles the composition of microbial communities",,,,,,,,,,,,

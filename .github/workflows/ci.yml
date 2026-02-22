@@ -13,32 +13,11 @@ jobs:
   CI:
     name: schema-convert
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v4 
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
-      - name: Install Schematic
-        shell: bash
-        run: |
-          pip3 install poetry
-          git clone --single-branch --branch develop https://github.com/Sage-Bionetworks/schematic.git
-          cd schematic
-          poetry install
-
-      - name: Convert .csv to .jsonld
-        shell: bash
-        run: |
-          # change * to your data-model.csv name if needed
-          poetry run schematic schema convert *.model.csv
-
-      - uses: r-lib/actions/pr-fetch@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit the changes
         run: |
@@ -47,6 +26,3 @@ jobs:
           git add \*.model.jsonld
           git commit -m "GitHub Action: convert *.model.csv to *.model.jsonld" || echo "No changes to commit"
 
-      - uses: r-lib/actions/pr-push@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
