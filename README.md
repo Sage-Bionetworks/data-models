@@ -12,11 +12,11 @@ This repository will recommend two different ways to maintaining your data model
 
 ## One CSV
 
-`example.model.csv` is a CSV representation of the example data model.
+[example.model.csv](./example.model.csv) is a CSV representation of the example data model.
 
 ## Modular CSV
 
-When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The `modules` folder contain an example of how the `example.model.csv` is broken down.
+When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The [modules](./modules) folder contain an example of how the [example.model.csv](./example.model.csv) is broken down.
 
 # Descriptions of valid values?
 
@@ -43,7 +43,9 @@ python scripts/assemble_csv_data_model.py modules assembled.csv
 synapse generate-json-schema assembled.csv --data-model-labels display_label
 ```
 
-# GitHub Actions Best Practices
+# GitHub Actions
+
+This repository also contains a [template github action](.github/workflows/ci.yml) that will generate jsonschemas from either the modular or one csv method for the usage of it within Curator.
 
 ## Avoiding Merge Conflicts with Automated Commits
 
