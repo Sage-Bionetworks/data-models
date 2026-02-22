@@ -11,18 +11,13 @@ on:
 
 jobs:
   CI:
-    name: schema-convert
+    name: generate-jsonschema
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v6
+      - name: Generate JSON Schemas
+        id: generate
+        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
         with:
-          python-version: '3.10'
-
-      - name: Commit the changes
-        run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add \*.model.jsonld
-          git commit -m "GitHub Action: convert *.model.csv to *.model.jsonld" || echo "No changes to commit"
-
+          data-model-source: ./example.model.csv
+          data-model-labels: "display_label"
