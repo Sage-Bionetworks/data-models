@@ -9,13 +9,15 @@ This repository will recommend two different ways to maintaining your data model
 
 ## One CSV
 
-`example.model.csv`: The CSV representation of the example data model. This file is created by the collective effort of data curators and annotators from a *community* (e.g. *HTAN*), and will be used to create the jsonschemas used within Curator.
+`example.model.csv` is a CSV representation of the example data model.
 
 ## Modular CSV
 
-The `modules` folder will contain the CSV but broken down into smaller CSVs and concatenated together at the end.
+When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The `modules` folder contain an example of how the `example.model.csv` is broken down.
 
-> NOTE: Data models can become really large and often times the "Valid Values" column can often contain many values without any descriptions. In this scenario, you can add descriptions to these valid values by adding extra rows in your data model csv under one condition.  The valid value CANNOT appear in any string value in the "DependsOn" column unless you wanted it to be a valid value of a column AND a column.
+# Descriptions of valid values?
+
+The "Valid Values" column for different data model attributes can often contain many values without any descriptions. In this scenario, you can add descriptions to these valid values by adding extra rows in your data model csv under one condition.  The valid value CANNOT appear in any string value in the "DependsOn" column unless you wanted it to be a valid value of a column AND a column.
 
 # Generating JSON schemas
 
