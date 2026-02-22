@@ -42,7 +42,7 @@ synapse generate-json-schema assembled.csv --data-model-labels display_label
 
 ## Avoiding Merge Conflicts with Automated Commits
 
-**Do NOT** configure GitHub Actions to commit generated files (like assembled CSVs or JSON schemas) back to the repository. This practice commonly leads to merge conflicts and complicates collaborative workflows.
+**Try to avoid** configuring GitHub Actions to commit generated files (like assembled CSVs or JSON schemas) back to the repository. This practice commonly leads to merge conflicts and complicates collaborative workflows.
 
 ### Problems with automated commits:
 - Creates merge conflicts when multiple contributors work simultaneously
@@ -56,10 +56,10 @@ Store generated files as build artifacts that can be downloaded
 
 ```yaml
 - name: Upload assembled CSV
-  uses: actions/upload-artifact@v3
+  uses: actions/upload-artifact@v6
   with:
     name: assembled-data-model
     path: assembled.csv
 ```
 
-This approach keeps your repository clean while still providing access to generated files for downstream consumers and for github tagged releases, it will retain the artifact.
+This approach keeps your repository clean while still providing access to generated files for downstream consumers and for github tagged releases, it will retain the artifact "forever"
