@@ -1,6 +1,6 @@
 # This workflow is used to generate jsonschemas from {community}.model.csv
 
-name: JSON Schema Generation CI/CD for Modular CSV
+name: Modular CSV JSON schema automation
 
 on:
 
