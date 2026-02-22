@@ -5,10 +5,11 @@
 
 The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for [Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). This can be used by those that prefer working in a tabular format (CSV) over JSON or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/).  The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
 
-This repository will recommend two different ways to maintaining your data model when using the CSV format.
+This repository will recommend three different ways to maintaining your data model when using the CSV format.
 
 1. One CSV
-1. Modularize your CSV
+1. Modular CSV
+1. Context driven CSV
 
 ## One CSV
 
