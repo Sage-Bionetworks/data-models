@@ -83,3 +83,12 @@ jobs:
           schema-dir: ${{ steps.generate.outputs.schemas }}
           synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
           version: ${{ github.event.release.tag_name }}
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            **/*.json
+            assembled.model.csv
