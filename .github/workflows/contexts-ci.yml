@@ -55,3 +55,5 @@ jobs:
           name: ${{ matrix.artifact-name }}
           path: "**/*.json"
           if-no-files-found: warn
+      # TODO: will need to add register jsonschema step
+      # TODO: will need to add release tag logic

@@ -37,7 +37,8 @@ The "Valid Values" column for attributes often contain many values without any d
 # Using this template repository
 
 1. Decide on the way you want to organize and maintain your data model (three options above)
-1. 
+1. Keep the desired folder (one_csv, modules, contexts) and delete the other two
+1. Keep the corresponding GitHub Action [onecsv-ci.yml](./github/workflows/onecsv-ci.yml), [modules-ci.yml](./github/workflows/modules-ci.yml), and [contexts-ci.yml](./github/workflows/contexts-ci.yml) and delete the other two. Consider renaming the file to `ci.yml` for simplicity.
 
 ---
 
