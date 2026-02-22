@@ -12,6 +12,9 @@ on:
       - '**.model.csv'
       - "modules/**"
 
+  release:
+    types: [published]
+
   # push:
   #   branches:
   #     - "*"
@@ -63,10 +66,20 @@ jobs:
             **/*.json
             assembled.model.csv
           if-no-files-found: warn
-      - name: Register schemas in Synapse
+      - name: Register schemas in Synapse (without version)
+        if: github.event_name != 'release'
         id: register
         uses: Sage-Bionetworks-Actions/register-jsonschema@develop
         with:
           org-name: dpetest
           schema-dir: ${{ steps.generate.outputs.schemas }}
           synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
+      - name: Register schemas in Synapse (with version)
+        if: github.event_name == 'release'
+        id: register-release
+        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        with:
+          org-name: dpetest
+          schema-dir: ${{ steps.generate.outputs.schemas }}
+          synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
+          version: ${{ github.event.release.tag_name }}
