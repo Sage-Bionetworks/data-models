@@ -169,7 +169,7 @@ Each portal should define a lightweight but explicit release process of their da
 
 # Using GitHub Actions
 
-This repository also contains a [template github action](.github/workflows/ci.yml) that will generate jsonschemas from either the modular or one csv method for the usage of it within Curator.
+This repository also contains [template github actions](.github/workflows/ci.yml) that will generate jsonschemas from each of the recommended data model maintenance approaches.  These github action workflows lightly implement the what was described in the "Best Practices: Operations for Data Models" section above but Sage Portal Owners do NOT have to use these workflows to achieve the best practices.
 
 ## Avoiding Merge Conflicts with Automated Commits
 
