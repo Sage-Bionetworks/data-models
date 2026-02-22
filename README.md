@@ -23,12 +23,16 @@ When data models get larger, it becomes overwhelming to maintain it all in one c
 
 Motivated by the ARK portal https://github.com/ARK-Portal/data_model data model, the data model can be created to utilize "contexts" in order to have context-specific conditionally required attributes with the bonus of also being able to define context-specific valid value lists for model attributes and more. An small example of this can be found in the [contexts](./contexts/) folder. Each data model is within it's own csv, a user can modularize this as well in whatever way they choose.  In this scenario, each "template" would have it's own data model csv and the generate-json-schema command would be run for each template csv instead of concatenating all of the CSV together.
 
+---
+
 # Descriptions of valid values
 
 The "Valid Values" column for attributes often contain many values without any descriptions. In this scenario, you can add descriptions to these valid values by adding extra rows and having these valid values appear as "Attributes".
 
 > [!CAUTION]
 > When adding valid value as an Attirbute to add a description of the valid value, it CANNOT appear in any string value in the "DependsOn" column unless you wanted it to be a data model attribute as well.
+
+---
 
 # Generating JSON schemas
 
@@ -51,7 +55,119 @@ python scripts/assemble_csv_data_model.py modules assembled.csv
 synapse generate-json-schema assembled.csv --data-model-labels display_label
 ```
 
-# GitHub Actions
+---
+
+# Best Practices: Operations for Data Models
+
+## Purpose
+
+This describes operational best practices for:
+
+1. Ensuring day-to-day data model edits reliably produce JSON Schemas that work with Synapse Curator.
+2. Creating official, versioned JSON Schema releases registered in Synapse.
+3. Maintaining clear separation between **test (development)** and **production (released)** schema environments.
+
+This guidance focuses on governance, change management, and release discipline.
+
+---
+
+## Guiding Principles
+
+1. **The data model is a product.** It requires ownership, review, and lifecycle management.
+2. **Schemas used in production must be immutable.**
+3. **Development and production environments must be separated.**
+4. **Validation must be reproducible and versioned.**
+5. **Portals own their schemas.** Each portal is responsible for maintaining its own schema lifecycle.
+
+---
+
+## Environment Separation: Recommended Organizational Structure
+
+Each portal is recommended to maintain **two separate Synapse schema organizations**.
+
+
+### Test Schema Organization (Development)
+
+**Purpose**
+
+- Rapid iteration
+- Curator compatibility testing
+- Pre-release schema staging
+
+**Characteristics**
+
+- Schemas may change frequently.
+- Versions may be overwritten.
+- Clearly labeled as **non-production**.
+
+**Recommended naming conventions**
+
+- `test.sage.{portal_name}`
+
+> Only development validation should point here.
+
+
+### Production Schema Organization (Released)
+
+**Purpose**
+
+- Official, versioned schema releases
+- Stable references for Curator
+
+**Characteristics**
+
+- Schemas are immutable once released.
+- Organized by version.
+- Ideally never overwritten.
+
+**Recommended naming conventions**
+
+- `sage.schemas.{portal_name}`
+- `org.synapse.{portal_name}`
+
+> Production Curator configurations must reference explicit released versions from this organization.
+
+---
+
+## Daily Model Edits (Test Environment)
+
+Ensure routine data model changes work with Synapse Curator and remain aligned with operational expectations.
+
+### Every change should generate JSON Schemas
+
+No model change is considered complete until JSON schemas are able to be generated and registered into the Test Schema Organization to ensure Synapse Curator compliance.
+
+---
+
+## Official Schema Releases (Production)
+
+Create reproducible, traceable, immutable schema releases registered in Synapse.
+
+### Schemas are versioned using explicit release numbers
+
+Recommended: **Semantic Versioning**
+
+- **MAJOR** – breaking changes
+- **MINOR** – backward-compatible additions
+- **PATCH** – non-breaking fixes
+
+Versioning applies to the release set, not individual ad hoc files.
+
+### Production releases must be immutable
+
+Once a schema version is registered in the Production Schema Organization, it should never be modified. Corrections to the schema require a new version.
+
+### Formal Release Process
+
+Each portal should define a lightweight but explicit release process of their data model to
+
+1. Confirm all changes can create Synapse compliant JSON schemas
+1. Ability to create release artifacts within GitHub (e.g. use GitHub Release + tag feature)
+1. Generate and register versioned JSONschemas to production JSONschema organization
+
+---
+
+# Using GitHub Actions
 
 This repository also contains a [template github action](.github/workflows/ci.yml) that will generate jsonschemas from either the modular or one csv method for the usage of it within Curator.
 
