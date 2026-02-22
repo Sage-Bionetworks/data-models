@@ -37,3 +37,29 @@ If you are using the modular CSV method, you will want to follow these instructi
 python scripts/assemble_csv_data_model.py modules assembled.csv
 synapse generate-json-schema assembled.csv --data-model-labels display_label
 ```
+
+# GitHub Actions Best Practices
+
+## Avoiding Merge Conflicts with Automated Commits
+
+**Do NOT** configure GitHub Actions to commit generated files (like assembled CSVs or JSON schemas) back to the repository. This practice commonly leads to merge conflicts and complicates collaborative workflows.
+
+### Problems with automated commits:
+- Creates merge conflicts when multiple contributors work simultaneously
+- Makes git history noisy with automated commits
+- Complicates branch management and pull request reviews
+- Can cause infinite loops if not properly configured
+
+### Recommended alternative: Use GitHub Artifacts
+
+Store generated files as build artifacts that can be downloaded
+
+```yaml
+- name: Upload assembled CSV
+  uses: actions/upload-artifact@v3
+  with:
+    name: assembled-data-model
+    path: assembled.csv
+```
+
+This approach keeps your repository clean while still providing access to generated files for downstream consumers and for github tagged releases, it will retain the artifact.

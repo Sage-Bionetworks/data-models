@@ -12,9 +12,9 @@ on:
       - '**.model.csv'
       - "modules/**"
 
-  push:
-    branches:
-      - "*"
+  # push:
+  #   branches:
+  #     - "*"
 
 jobs:
 
