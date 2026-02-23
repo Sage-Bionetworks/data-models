@@ -97,10 +97,9 @@ This guidance focuses on governance, change management, and release discipline.
 
 ## Guiding Principles
 
-1. **The data model is a product.** It requires ownership, review, and lifecycle management.
-2. **Schemas used in production must be immutable.**
-3. **Development and production environments must be separated.**
-4. **Validation must be reproducible and versioned.**
+1. Data models require ownership, review, and lifecycle management.
+1. Schemas used in production must be immutable.
+1. Development and production environments should be separated. It is encouraged to have a development environment.
 5. **Portals own their schemas.** Each portal is responsible for maintaining its own schema lifecycle.
 
 ---
