@@ -100,7 +100,7 @@ This guidance focuses on governance, change management, and release discipline.
 1. Data models require ownership, review, and lifecycle management.
 1. Schemas used in production must be immutable.
 1. Development and production environments should be separated. It is encouraged to have a development environment.
-5. **Portals own their schemas.** Each portal is responsible for maintaining its own schema lifecycle.
+1. Portals own their data models.
 
 ---
 
