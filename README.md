@@ -3,21 +3,57 @@
 > [!IMPORTANT]
 > The default branch has been converted to `tyu-refresh`, but the content is still under review https://github.com/Sage-Bionetworks/data-models/pull/43.  Once this PR is merged, the default branch will be converted back to `main`.  Feedback would be greatly appreciated.
 
-The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for [Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). This can be used by those that prefer working in a tabular format (CSV) over JSON or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/).  The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
+The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for 
+[Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). 
+This can be used by those that prefer working in a tabular format (CSV) over JSON 
+or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/) 
+and a working example CSV is available at [example.model.csv](./one_csv/example.model.csv). 
 
-This repository will recommend three different ways to maintaining your data model when using the CSV format.
+The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
 
-1. One CSV
+# Data Model Design
+
+The Curator-Extension data model format can be leveraged to support a variety of data model 
+design needs, particularly when accessory scripts and CI/CD workflows are utilized. 
+Below we describe three different approaches known to be used by Sage Bionetworks 
+teams. If your use case is not well supported with one of these designs please 
+submit a issue and our team will be happy to work with you to find a solution.
+
+1. Single CSV
 1. Modular CSV
 1. Contextualized CSV
 
-## One CSV
+## Single CSV
 
-[example.model.csv](./one_csv/example.model.csv) is a CSV representation of the example data model.
+Most data models will start here, as a single CSV file containing all data model 
+attributes and template/schema definitions. 
+
+<img src="./images/single_csv.png">
+
+Is best for
+- data models with a limited number of attribute and schema definitions
+- when little-to-no use of conditional attribute behavior is needed (or when 
+conditional attribute behavior is only defined for attributes with limited use across 
+templates/schema)
 
 ## Modular CSV
 
-When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The [modules](./modules) folder contain an example of how the [example.model.csv](./example.model.csv) is broken down.
+As a data model gets larger it can become overwhelming to maintain as a single CSV, 
+particularly when it comes to manual revisions to the CSV file. Using a modular 
+approach, where data model attributes and schema definitions are split up 
+across multiple CSV files can alleviate this challenge. The [modules](./modules) folder 
+contain an example of how the [example.model.csv](./example.model.csv) can be 
+broken down into modules.
+
+<img src="./images/module_csv.png">
+
+CI/CD workflows are then used to concatenated each module into a single model CSV 
+from which JSON schema are derived. With this approach it will be critical to have 
+a well defined data model maintenance and development process and robust QC review 
+process to ensure work is not duplicated or overwritten across modules upon concatenation.
+
+Some examples of modular data models include [eliteportal/data-models](https://github.com/eliteportal/data-models) 
+and [mc2-center/data-models](https://github.com/mc2-center/data-models).
 
 ## Contextualized CSV
 
