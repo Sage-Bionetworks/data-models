@@ -28,7 +28,9 @@ submit a issue and our team will be happy to work with you to find a solution.
 Most data models will start here, as a single CSV file containing all data model 
 attributes and template/schema definitions. 
 
-<img src="./images/single_csv.png">
+<p align="center">
+  <img src="./images/single_csv.png" height="400" width="auto">
+</p>
 
 Is best for
 - data models with a limited number of attribute and schema definitions
@@ -45,7 +47,9 @@ across multiple CSV files can alleviate this challenge. The [modules](./modules)
 contain an example of how the [example.model.csv](./example.model.csv) can be 
 broken down into modules.
 
-<img src="./images/module_csv.png">
+<p align="center">
+  <img src="./images/module_csv.png" height="400" width="auto">
+</p>
 
 Is best for
 - large data models with many attributes. The tipping point for when a modular 
@@ -76,7 +80,9 @@ both have multiple CSVs, these approaches differ in that modular data models are
 designed to be concatenated into a single model CSV, while each contextualized CSV 
 is designed to be used independently to generate JSON schemas for a specific context.
 
-<img src="./images/context_csv.png" alt='Visualization of contextualized data model design' height="400">
+<p align="center">
+  <img src="./images/context_csv.png" alt='Visualization of contextualized data model design' height="400" width="auto">
+</p>
 
 Best for
 - when a data model has attributes with conditional behavior, particularly when 
