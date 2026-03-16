@@ -76,7 +76,7 @@ both have multiple CSVs, these approaches differ in that modular data models are
 designed to be concatenated into a single model CSV, while each contextualized CSV 
 is designed to be used independently to generate JSON schemas for a specific context.
 
-<img src="./images/context_csv.png">
+<img src="./images/context_csv.png" alt='Visualization of contextualized data model design' height="400">
 
 Best for
 - when a data model has attributes with conditional behavior, particularly when 
@@ -91,8 +91,8 @@ There are potentially different ways that data models can build out a contextual
 data model design which hypothetically could also include a modular approach as well.
 CI/CD workflows will be critical for this approach. 
 
-A demo example an be found here in the [contexts](./contexts/) folder where context 
-is it's own CSV. One in-production example is 
+A demo example an be found here in the [contexts](./contexts/) folder where each context 
+is it's own CSV. An in-production example is 
 [ARK-Portal/data_model](https://github.com/ARK-Portal/data_model).
 
 ---
