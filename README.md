@@ -29,7 +29,7 @@ Most data models will start here, as a single CSV file containing all data model
 attributes and template/schema definitions. 
 
 <p align="center">
-  <img src="./images/single_csv.png" height="400" width="auto">
+  <img src="./images/single_csv.png" height="auto" width="600">
 </p>
 
 Is best for
@@ -48,7 +48,7 @@ contain an example of how the [example.model.csv](./example.model.csv) can be
 broken down into modules.
 
 <p align="center">
-  <img src="./images/module_csv.png" height="400" width="auto">
+  <img src="./images/module_csv.png" height="auto" width="600">
 </p>
 
 Is best for
