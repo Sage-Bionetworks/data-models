@@ -3,25 +3,103 @@
 > [!IMPORTANT]
 > The default branch has been converted to `tyu-refresh`, but the content is still under review https://github.com/Sage-Bionetworks/data-models/pull/43.  Once this PR is merged, the default branch will be converted back to `main`.  Feedback would be greatly appreciated.
 
-The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for [Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). This can be used by those that prefer working in a tabular format (CSV) over JSON or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/).  The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
+The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for 
+[Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). 
+This can be used by those that prefer working in a tabular format (CSV) over JSON 
+or LinkML. A data model is created in the format specified [here](https://python-docs.synapse.org/en/latest/explanations/curator_data_model/) 
+and a working example CSV is available at [example.model.csv](./one_csv/example.model.csv). 
 
-This repository will recommend three different ways to maintaining your data model when using the CSV format.
+The Curator-Extension in the Synapse Python Client can be used to convert to JSON Schema.
 
-1. One CSV
+# Data Model Design
+
+The Curator-Extension data model format can be leveraged to support a variety of data model 
+design needs, particularly when accessory scripts and CI/CD workflows are utilized. 
+Below we describe three different approaches known to be used by Sage Bionetworks 
+teams. If your use case is not well supported with one of these designs please 
+submit a issue and our team will be happy to work with you to find a solution.
+
+1. Single CSV
 1. Modular CSV
 1. Contextualized CSV
 
-## One CSV
+## Single CSV
 
-[example.model.csv](./one_csv/example.model.csv) is a CSV representation of the example data model.
+Most data models will start here, as a single CSV file containing all data model 
+attributes and template/schema definitions. 
+
+<p align="center">
+  <img src="./images/single_csv.png" height="auto" width="600">
+</p>
+
+Is best for
+- data models with a limited number of attribute and schema definitions
+- when little-to-no use of conditional attribute behavior is needed (or when 
+conditional attribute behavior is only defined for attributes with limited use across 
+templates/schema)
 
 ## Modular CSV
 
-When data models get larger, it becomes overwhelming to maintain it all in one csv.  In this scenario, users can choose to break down the csv into smaller, more manageable chunks.  The [modules](./modules) folder contain an example of how the [example.model.csv](./example.model.csv) is broken down.
+As a data model gets larger it can become overwhelming to maintain as a single CSV, 
+particularly when it comes to manual revisions to the CSV file. Using a modular 
+approach, where data model attributes and schema definitions are split up 
+across multiple CSV files can alleviate this challenge. The [modules](./modules) folder 
+contain an example of how the [example.model.csv](./example.model.csv) can be 
+broken down into modules.
+
+<p align="center">
+  <img src="./images/module_csv.png" height="auto" width="600">
+</p>
+
+Is best for
+- large data models with many attributes. The tipping point for when a modular 
+approach is needed will vary, but typically models with > 100 attributes may be easier 
+to manage with this approach.
+- when little-to-no use of conditional attribute behavior is needed (or when 
+conditional attribute behavior is only defined for attributes with limited use across 
+templates/schema).
+
+CI/CD workflows are then used to concatenated each module into a single model CSV 
+from which JSON schema are derived. With this approach it will be critical to have 
+a well defined data model maintenance and development process and robust QC review 
+process to ensure work is not duplicated or overwritten upon module concatenation.
+
+Some examples of modular data models include [eliteportal/data-models](https://github.com/eliteportal/data-models) 
+and [mc2-center/data-models](https://github.com/mc2-center/data-models).
 
 ## Contextualized CSV
 
-Motivated by the ARK portal https://github.com/ARK-Portal/data_model data model, the data model can be created to utilize "contexts" in order to have context-specific conditionally required attributes with the bonus of also being able to define context-specific valid value lists for model attributes and more. An small example of this can be found in the [contexts](./contexts/) folder. Each data model is within it's own csv, a user can modularize this as well in whatever way they choose.  In this scenario, each "template" would have it's own data model csv and the generate-json-schema command would be run for each template csv instead of concatenating all of the CSV together.
+The contextualized data model design enables greater flexibility in data model schema 
+design and behavior at the expense of more complex data model maintenance and development 
+processes. In this design there are >1 standalone model CSV files, each of which defines 
+one or more schemas. Each standalone CSV is a complete model scoped and designed for a 
+specific context.
+
+Though there are parallels between modular and contextualized data model designs in that 
+both have multiple CSVs, these approaches differ in that modular data models are 
+designed to be concatenated into a single model CSV, while each contextualized CSV 
+is designed to be used independently to generate JSON schemas for a specific context.
+
+<p align="center">
+  <img src="./images/context_csv.png" alt='Visualization of contextualized data model design' height="400" width="auto">
+</p>
+
+Best for
+- when a data model has attributes with conditional behavior, particularly when 
+that conditional behavior is only desired for specific schemas or 'contexts'.
+- when context-specific valid values (aka enums) are desired for improved user experience in Curator.
+
+With this approach it will be critical to have a well defined data model maintenance 
+and development process and robust QC and testing process to ensure the derived 
+JSON schema meet expectations.
+
+There are potentially different ways that data models can build out a contextualized 
+data model design which hypothetically could also include a modular approach as well.
+CI/CD workflows will be critical for this approach. 
+
+A demo example an be found here in the [contexts](./contexts/) folder where each context 
+is it's own CSV. An in-production example is 
+[ARK-Portal/data_model](https://github.com/ARK-Portal/data_model).
 
 ---
 
