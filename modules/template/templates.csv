@@ -1,0 +1,3 @@
+Attribute,Description,DependsOn,Valid Values,Required,columnType,IsTemplate,Format,Maximum,Minimum,Pattern,Validation Rules,Parent,Source
+patient_template,"Patient template","ID, birthDate, diagnosis, age, weight, healthScore",,,,True,,,,,,,
+metadata_template,"Metadata template","assay, fileFormat",,,,True,,,,,,,

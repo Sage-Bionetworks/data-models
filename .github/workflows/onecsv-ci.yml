@@ -1,0 +1,41 @@
+# This workflow is used to generate jsonschemas from {community}.model.csv
+
+name: One CSV JSON schema automation
+
+on:
+
+  pull_request:
+    branches:
+      - main
+    # change * to your data-model.csv name if needed
+    paths:
+      - '**.model.csv'
+      - "modules/**"
+
+  release:
+    types: [published]
+
+  # push:
+  #   branches:
+  #     - "*"
+
+jobs:
+
+  generate-jsonschema-from-one-csv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Generate JSON Schemas
+        id: generate
+        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
+        with:
+          data-model-source: ./one_csv/example.model.csv
+          data-model-labels: "display_label"
+      - name: Upload schemas as artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: json-schemas
+          path: "**/*.json"
+          if-no-files-found: warn
+      # TODO: will need to add register jsonschema step
+      # TODO: will need to add release tag logic

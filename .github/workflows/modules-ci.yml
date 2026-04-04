@@ -1,0 +1,75 @@
+# This workflow is used to generate jsonschemas from {community}.model.csv
+
+name: Modular CSV JSON schema automation
+
+on:
+
+  pull_request:
+    branches:
+      - main
+    # change * to your data-model.csv name if needed
+    paths:
+      - '**.model.csv'
+      - "modules/**"
+
+  release:
+    types: [published]
+
+  # push:
+  #   branches:
+  #     - "*"
+
+jobs:
+
+  generate-jsonschema-from-multiple-csv:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Assemble CSV files
+        run: |
+          python scripts/assemble_csv_data_model.py ./modules/ assembled.model.csv
+      - name: Generate JSON Schemas
+        id: generate
+        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
+        with:
+          data-model-source: ./assembled.model.csv
+          data-model-labels: "display_label"
+      - name: Upload schemas and assembled model as artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: json-schemas-and-assembled-csv
+          path: |
+            **/*.json
+            assembled.model.csv
+          if-no-files-found: warn
+      - name: Register schemas in Synapse (without version)
+        if: github.event_name != 'release'
+        id: register
+        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        with:
+          org-name: dpetest
+          schema-dir: ${{ steps.generate.outputs.schemas }}
+          synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
+      - name: Register schemas in Synapse (with version)
+        if: github.event_name == 'release'
+        id: register-release
+        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        with:
+          org-name: dpetest
+          schema-dir: ${{ steps.generate.outputs.schemas }}
+          synapse-auth-token: ${{ secrets.SYNAPSE_AUTH_TOKEN }}
+          version: ${{ github.event.release.tag_name }}
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.event_name == 'release'
+        with:
+          files: |
+            **/*.json
+            assembled.model.csv

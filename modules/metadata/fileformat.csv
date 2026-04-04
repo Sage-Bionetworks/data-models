@@ -1,0 +1,5 @@
+Attribute,Description,DependsOn,Valid Values,Required,columnType,IsTemplate,Format,Maximum,Minimum,Pattern,Validation Rules,Parent,Source
+fileFormat,"Defined format of the data file, typically corresponding to extension, but sometimes indicating more general group of files produced by the same tool or software",,"fastq, csv, txt",True,string,,,,,,,,
+fastq,"FASTQ file format, commonly used for storing biological sequence data, particularly from high-throughput sequencing technologies",,,,,,,,,,,,
+csv,"CSV (Comma-Separated Values) file format, a widely used plain text format for representing tabular data, where each line corresponds to a row and columns are separated by commas",,,,,,,,,,,,
+txt,"TXT (Text) file format, a generic plain text format that can contain unstructured or semi-structured data, often used for simple data storage or exchange",,,,,,,,,,,,
