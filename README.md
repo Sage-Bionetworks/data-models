@@ -1,7 +1,5 @@
 # Data Models
 
-> [!IMPORTANT]
-> The default branch has been converted to `tyu-refresh`, but the content is still under review https://github.com/Sage-Bionetworks/data-models/pull/43.  Once this PR is merged, the default branch will be converted back to `main`.  Feedback would be greatly appreciated.
 
 The Curator-Extension (formerly Schematic) data model is used to create JSON Schemas for 
 [Curator to enable the contribution of valid metadata](https://docs.synapse.org/synapse-docs/managing-metadata-with-curator). See [JSON Schema documentation](https://json-schema.org/). 
