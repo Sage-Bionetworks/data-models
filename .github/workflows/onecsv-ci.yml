@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Generate JSON Schemas
         id: generate
-        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
+        uses: Sage-Bionetworks/synapse-actions/generate-jsonschema@86177c581889419206e5f3d082d478f2d957d0a0 # v1.0.0
         with:
           data-model-source: ./one_csv/example.model.csv
           data-model-labels: "display_label"

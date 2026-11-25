@@ -37,7 +37,7 @@ jobs:
           python scripts/assemble_csv_data_model.py ./modules/ assembled.model.csv
       - name: Generate JSON Schemas
         id: generate
-        uses: Sage-Bionetworks-Actions/generate-jsonschema@main
+        uses: Sage-Bionetworks/synapse-actions/generate-jsonschema@86177c581889419206e5f3d082d478f2d957d0a0 # v1.0.0
         with:
           data-model-source: ./assembled.model.csv
           data-model-labels: "display_label"
@@ -52,7 +52,7 @@ jobs:
       - name: Register schemas in Synapse (without version)
         if: github.event_name != 'release'
         id: register
-        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        uses: Sage-Bionetworks/synapse-actions/register-jsonschema@86177c581889419206e5f3d082d478f2d957d0a0 # v1.0.0
         with:
           org-name: dpetest
           schema-dir: ${{ steps.generate.outputs.schemas }}
@@ -60,7 +60,7 @@ jobs:
       - name: Register schemas in Synapse (with version)
         if: github.event_name == 'release'
         id: register-release
-        uses: Sage-Bionetworks-Actions/register-jsonschema@develop
+        uses: Sage-Bionetworks/synapse-actions/register-jsonschema@86177c581889419206e5f3d082d478f2d957d0a0 # v1.0.0
         with:
           org-name: dpetest
           schema-dir: ${{ steps.generate.outputs.schemas }}
